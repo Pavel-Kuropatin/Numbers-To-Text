@@ -47,30 +47,24 @@ public class NumbersToText {
 
     private String classSpelling(long number, int classNumber) {
         if (classNumber == 1) return "";
-        else {
-            boolean ifAllowedIndex1 = (number / 10) % 10 != 1 && (number % 10 == 2 || number % 10 == 3 || number % 10 == 4);
-            if (classNumber == 2) {
-                if (number % 10 == 1 && number % 100 == 1) return THOUSANDS[0] + " ";
-                else if (ifAllowedIndex1) return THOUSANDS[1] + " ";
-                else if (number % 1000 != 0) return THOUSANDS[2] + " ";
-                else return "";
-            } else {
-                boolean ifAllowedIndex0 = number % 10 == 1 && (number % 100 == 1 || number % 100 > 20);
-                if (classNumber == 3) {
-                    if (ifAllowedIndex0) return MILLIONS[0] + " ";
-                    else if (ifAllowedIndex1) return MILLIONS[1] + " ";
-                    else if (number % 1000 != 0) return MILLIONS[2] + " ";
-                    else return "";
-                }
-                else if (classNumber == 4) {
-                    if (ifAllowedIndex0) return BILLIONS[0] + " ";
-                    else if (ifAllowedIndex1) return BILLIONS[1] + " ";
-                    else if (number % 1000 != 0) return BILLIONS[2] + " ";
-                    else return "";
-                }
-            }
-        }
-        return "";
+        boolean ifAllowedIndex0 = number % 10 == 1 && (number % 100 == 1 || number % 100 > 20);
+        boolean ifAllowedIndex1 = (number / 10) % 10 != 1 && (number % 10 == 2 || number % 10 == 3 || number % 10 == 4);
+        if (classNumber == 2) {
+            if (number % 10 == 1 && number % 100 == 1) return THOUSANDS[0] + " ";
+            else if (ifAllowedIndex1) return THOUSANDS[1] + " ";
+            else if (number % 1000 != 0) return THOUSANDS[2] + " ";
+            else return "";
+        } else if (classNumber == 3) {
+            if (ifAllowedIndex0) return MILLIONS[0] + " ";
+            else if (ifAllowedIndex1) return MILLIONS[1] + " ";
+            else if (number % 1000 != 0) return MILLIONS[2] + " ";
+            else return "";
+        } else if (classNumber == 4) {
+            if (ifAllowedIndex0) return BILLIONS[0] + " ";
+            else if (ifAllowedIndex1) return BILLIONS[1] + " ";
+            else if (number % 1000 != 0) return BILLIONS[2] + " ";
+            else return "";
+        } else return "";
     }
 
     private int getNumberOfClasses(long number) {
